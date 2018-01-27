@@ -3,20 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using MVVMBasic.ViewModel;
 using Xamarin.Forms;
 
 namespace MVVMBasic
 {
 	public partial class App : Application
 	{
-		public App ()
+        public static AlunoViewModel AlunoVM { get;  set; }
+
+        public App ()
 		{
+
 			InitializeComponent();
+            InitializeApplication();
 
-			MainPage = new MVVMBasic.MainPage();
-		}
+            MainPage = new NavigationPage(new View.AlunoView() { BindingContext = App.AlunoVM, BackgroundColor = Color.Beige });
+            
+      
 
-		protected override void OnStart ()
+        }
+
+        private void InitializeApplication()
+        {
+            // throw new NotImplementedException();
+            if (AlunoVM == null) AlunoVM = new AlunoViewModel();
+        }
+
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}
